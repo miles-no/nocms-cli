@@ -8,6 +8,7 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^2.4.0",
+    "grunt-init": "^0.3.2",
     "prompt": "^1.0.0",
     "terminal-link": "^1.1.0"
   }
