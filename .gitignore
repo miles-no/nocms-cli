@@ -1,0 +1,37 @@
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# node-waf configuration
+.lock-wscript
+
+# IDE
+.idea/*
+
+# Data
+/data/**
+
+**/.env
+env/
+env
+
+
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+build/Release
+build/
+example/build
+lib/
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+node_modules
+*.DS_Store*
+*.sass-cache
+
+# Source maps
+**/*.map
