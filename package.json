@@ -1,0 +1,14 @@
+{
+  "name": "nocms-cli",
+  "version": "1.0.0",
+  "description": "CLI for managing multiple nocms projects",
+  "main": "nocms-cli.js",
+  "bin": "nocms-cli.js",
+  "author": "Jørgen Landsnes",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.0",
+    "prompt": "^1.0.0",
+    "terminal-link": "^1.1.0"
+  }
+}
