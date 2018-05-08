@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: varnish
+  namespace: {%= namespace %}-prod
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: varnish
+        env: prod
+    spec:
+      nodeSelector:
+        milescloud/node-type: normal
+      containers:
+      - name: varnish
+        image: miles-nocms.jfrog.io/{%= imageNames.varnish %}:${DOCKER_TAG}
+        env:
+          - name: VCL_PATH
+            value: /config/varnish.vcl
+          - name: VARNISH_OPTS
+            value: -p feature=+esi_disable_xml_check -p default_ttl=30
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 200m
+            memory: 200Mi
+          requests:
+            cpu: 50m
+            memory: 100Mi
+      imagePullSecrets:
+      - name: gcr-registry

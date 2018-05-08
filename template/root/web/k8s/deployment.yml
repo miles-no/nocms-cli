@@ -1,0 +1,57 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: web
+  namespace: {%= namespace %}-prod
+spec:
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: web
+        env: prod
+    spec:
+      affinity:
+        # Ensures only ONE pod of same type per node
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 50
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: run
+                  operator: In
+                  values:
+                  - web
+              topologyKey: kubernetes.io/hostname
+      nodeSelector:
+        milescloud/node-type: normal
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: web
+        image: miles-nocms.jfrog.io/{%= imageNames.web %}:${DOCKER_TAG}
+        imagePullPolicy: Always
+        env:
+          - name: NODE_ENV
+            value: prod
+          - name: CRYPTEX_KEYSOURCE_PLAINTEXT_KEY
+            valueFrom:
+              secretKeyRef:
+                name: nocms-secrets
+                key: cryptex-keysource-key
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: 200m
+            memory: 300Mi
+          requests:
+            cpu: 50m
+            memory: 50Mi
+      imagePullSecrets:
+      - name: gcr-registry

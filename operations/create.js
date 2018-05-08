@@ -22,7 +22,15 @@ const getPort = (range, port) => {
 };
 
 module.exports = (context) => {
+  const filesInCwd = fs.readdirSync(process.cwd());
+
   console.log('');
+
+  if (filesInCwd.length !== 0) {
+    console.log(chalk.red(`    You need to call create from an empty folder.`));
+    return;
+  }
+  
   if (context) {
     console.log(chalk.red(`    Context found at ${context.contextFile}. Please create project in some other folder.`));
     return;
@@ -192,5 +200,12 @@ module.exports = (context) => {
     };
 
     fs.writeFileSync('./nocms.conf.json', JSON.stringify(conf, null, '  '));
+
+    const gruntInitCmd = `node ${__dirname}/../node_modules/grunt-init/bin/grunt-init --force ${__dirname}/../template`;
+
+    const gruntInitResult = execute(gruntInitCmd);
+    
+    console.log(gruntInitResult.toString('utf8'));
+  
   });
 };

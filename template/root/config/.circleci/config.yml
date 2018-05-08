@@ -1,0 +1,91 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker:stable-git
+        environment:
+          IMAGE_NAME: {%= imageNames.config %}
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - setup_remote_docker
+
+      - restore_cache:
+          keys:
+            - v1-{{ .Branch }}
+          paths:
+            - /caches/${IMAGE_NAME}.tar
+
+      - run:
+          name: Login to Docker
+          command: |
+            docker login -u ${DOCKER_USER} -p ${DOCKER_PASS} ${DOCKER_URL}
+      - run:
+          name: Load Docker image layer cache
+          command: |
+            set +o pipefail
+            docker load -i /caches/${IMAGE_NAME}.tar | true
+      - run:
+          name: Build application Docker image
+          command: |
+            docker build --cache-from=${IMAGE_NAME} -t ${IMAGE_NAME} .
+      - run:
+          name: Save Docker image layer cache
+          command: |
+            mkdir -p /caches
+            docker save -o /caches/${IMAGE_NAME}.tar ${IMAGE_NAME}
+      - save_cache:
+          key: v1-{{ .Branch }}-{{ epoch }}
+          paths:
+            - /caches/${IMAGE_NAME}.tar
+      - deploy:
+          name: Push application Docker image
+          command: |
+            docker tag ${IMAGE_NAME} "miles-nocms.jfrog.io/${IMAGE_NAME}:${CIRCLE_BUILD_NUM}"
+            docker tag ${IMAGE_NAME} "miles-nocms.jfrog.io/${IMAGE_NAME}:latest"
+            docker push miles-nocms.jfrog.io/${IMAGE_NAME}:${CIRCLE_BUILD_NUM}
+            docker push miles-nocms.jfrog.io/${IMAGE_NAME}:latest
+      - run:
+          name: Push version number to file
+          command: |
+            mkdir -p workspace
+            echo ${CIRCLE_BUILD_NUM} > workspace/version
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - version
+  deploy:
+    docker:
+      - image: miles-nocms.jfrog.io/miles-cloud-deploy
+        auth:
+          username: ${DOCKER_USER}
+          password: ${DOCKER_PASS}
+    steps:
+      - attach_workspace:
+          at: workspace
+      - run:
+          name: Execute
+          command: |
+            export AWS_ACCESS_KEY_ID=$DEPLOY_ACCESS_KEY
+            export AWS_SECRET_ACCESS_KEY=$DEPLOY_ACCESS_SECRET
+            export KUBE_SERVER=$DEPLOY_KUBE_SERVER
+            export GIT_REPO=miles-webteam@bitbucket.org:nocms/${CIRCLE_PROJECT_REPONAME}.git
+            export GIT_REPO_NAME=$CIRCLE_PROJECT_REPONAME
+            export DOCKER_TAG=`cat workspace/version`
+            export KUBE_CERT_NAME=$DEPLOY_CERT_NAME
+            export GIT_SSH_KEY_NAME=$DEPLOY_GIT_SSH_KEY
+            echo "Deploying version $DOCKER_TAG"
+            /run.sh
+
+workflows:
+  version: 2
+  test-and-release:
+    jobs:
+      - build:
+          context: org-global
+      - deploy:
+          context: org-global
+          requires:
+            - build

@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: fragments
+  namespace: {%= namespace %}-prod
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: fragments
+        env: prod
+    spec:
+      nodeSelector:
+        milescloud/node-type: normal
+      containers:
+      - name: fragments
+        image: miles-nocms.jfrog.io/{%= imageNames.fragments %}:${DOCKER_TAG}
+        env:
+          - name: NODE_ENV
+            value: prod
+          - name: CRYPTEX_KEYSOURCE_PLAINTEXT_KEY
+            valueFrom:
+              secretKeyRef:
+                name: nocms-secrets
+                key: cryptex-keysource-key
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: 200m
+            memory: 200Mi
+          requests:
+            cpu: 50m
+            memory: 50Mi
+      imagePullSecrets:
+      - name: gcr-registry
+
+---

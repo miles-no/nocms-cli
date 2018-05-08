@@ -1,0 +1,42 @@
+{
+  "default": {
+    "NAMESPACE": "{%= namespace %}-local",
+    "FEATURES": {
+
+    },
+    "DATABASE_HOST": "http://elasticsearch:9200",
+    "LOG_CONFIG": {
+      "logAsJson": false,
+      "useChalk": true,
+      "timestampFormat": "%d %H:%M:%S",
+      "logFormat": "%T %L - %C",
+      "logLevel": "debug",
+      "output": {
+        "all": ["console"],
+        "error": { "file": "/log/error.log" }
+      }
+    }
+  },
+  "test": {
+    "NAMESPACE": "{%= namespace %}-test",
+    "FEATURES": {},
+    "LOG_CONFIG": {
+      "logLevel": "debug",
+      "output": {
+        "all": ["console"],
+        "error": { "file": "/log/error.log" }
+      }
+    }
+  },
+  "prod": {
+    "NAMESPACE": "{%= namespace %}-prod",
+    "FEATURES": {},
+    "LOG_CONFIG": {
+      "logAsJson": true,
+      "logLevel": "error",
+      "output": {
+        "all": ["console"]
+      }
+    }
+  }
+}

@@ -3,12 +3,12 @@ const chalk = require('chalk');
 
 const execSync = require('child_process').execSync;
 
-const execute = (cmd) => {
+const execute = (cmd, cb) => {
   try{
-    execSync(cmd);
-    return true;
+    return execSync(cmd);
   } catch(ex) {
     console.warn(chalk.bold.red(`Command failed: ${cmd}`, ex.message));
+    console.log(ex.stdout.toString('utf8'));
     return false;
   }
 };

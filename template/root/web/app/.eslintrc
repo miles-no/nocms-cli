@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "webteam",
+    "webteam/rules/react"
+  ],
+   "env": {
+    "browser": true,
+    "node": true
+  }
+}

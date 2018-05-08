@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Forhåndsvisning</title>
+    <style>
+body{
+  margin: 0;
+  padding: 0;
+}
+
+.mobile{
+  background-image: url(/assets/img/preview_phone_portrait.png);
+  background-repeat: no-repeat;
+  height: 980px;
+  width: 497px;
+  background-size: contain;
+}
+.mobile iframe {
+  height: 732px;
+  width: 412px;
+  margin: 123px 0 0 44px;
+  border: none;
+}
+
+.tablet{
+  background-image: url(/assets/img/preview_tablet_portrait.png);
+  background-repeat: no-repeat;
+  height: 1264px;
+  width: 908px;
+  background-size: contain;
+}
+.tablet iframe {
+  width: 768px;
+  height: 1024px;
+  margin: 122px 0 0 64px;
+  border: none;
+}
+
+.tabletLandscape{
+  background-image: url(/assets/img/preview_tablet_landscape.png);
+  background-repeat: no-repeat;
+  height: 896px;
+  width: 1264px;
+  background-size: contain;
+}
+.tabletLandscape iframe{
+  height: 768px;
+  width: 1024px;
+  margin: 64px 0 0 121px;
+  border: none;
+}
+
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+var m = window.location.search.match(/\?type=(mobile|tablet|tabletLandscape)\&url=(.*)/)
+  , type = 'mobile'
+  , url = '/';
+if(m){
+  type = m[1];
+  url = m[2];
+}
+document.title = 'Forhåndsvisning, ' + (type === 'mobile' ? 'mobil' : 'tablet');
+
+document.write('<div class="' + type + '"><iframe src="' + url + '"></iframe>');
+    </script>
+  </body>
+</html>
