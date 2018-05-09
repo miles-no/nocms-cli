@@ -22,19 +22,19 @@ const createVolumes = (context) => {
     execute(`docker volume create --name ${v.volume}`);
     console.log(`    Created volume ${chalk.bold.yellow(v.volume)} for ${chalk.bold.yellow(v.container)}`);
   });
-  
+
   console.log('');
-}
+};
 
 module.exports = (context) => {
   console.log('');
   console.log(chalk.green('    Creating docker network'));
-  
+
   const result = execute(`docker network create --subnet="${context.network}" ${context.namespace}`);
 
   if (result) {
     console.log(`    Network for namespace ${chalk.bold.yellow(context.namespace)} (${chalk.bold.yellow(context.network)}) created`);
   }
-  
+
   createVolumes(context);
 };

@@ -4,6 +4,8 @@ const dockerNetwork = '192.168.4.0/24';
 const dockerNetworkName = 'nocms';
 const prompt = require('prompt');
 const fs = require('fs');
+const build = require('./build');
+const init = require('./init');
 
 const getNetwork = (portRange) => {
   const match = portRange.match(/^(\d{2,3})00$/);
@@ -30,12 +32,12 @@ module.exports = (context) => {
     console.log(chalk.red(`    You need to call create from an empty folder.`));
     return;
   }
-  
+
   if (context) {
     console.log(chalk.red(`    Context found at ${context.contextFile}. Please create project in some other folder.`));
     return;
   }
-  
+
   prompt.start();
 
   const boolMap = {
@@ -95,7 +97,7 @@ module.exports = (context) => {
         },
       },
       dockerRegistry: {
-        default: '139.162.190.101',
+        default: 'miles-nocms.jfrog.io',
         type: 'string',
       },
       portRange: {
@@ -127,31 +129,32 @@ module.exports = (context) => {
       },
       {
         name: 'config_api',
-        image: `${result.dockerRegistry}/config_api`,
+        image: `${result.dockerRegistry}/${result.namespace}_config_api`,
         ports: [`${getPort(result.portRange, 4)}:3000`],
       },
       {
-        name: 'page',
-        localImage: 'page_service',
+        name: 'nocms_page',
         image: `${result.dockerRegistry}/page_service`,
         ports: [`${getPort(result.portRange, 2)}:3000`],
+        isExternal: true,
       },
       {
-        name: 'main_web_server',
-        image: `${result.dockerRegistry}/main_web_server`,
+        name: 'web',
+        image: `${result.dockerRegistry}/${result.namespace}_web`,
         ports: [`${getPort(result.portRange, 1)}:3000`],
       },
       {
-        name: 'message_api',
+        name: 'nocms_message_api',
         image: `${result.dockerRegistry}/message_api`,
         ports: [`${getPort(result.portRange, 3)}:3000`],
+        isExternal: true,
       },
     ];
     const optionalContainers = [];
     const lastContainers = [
       {
         name: 'varnish',
-        image: `${result.dockerRegistry}/nocms_varnish`,
+        image: `${result.dockerRegistry}/${result.namespace}_varnish`,
         flags: ['-e VCL_PATH="/config/varnish.vcl"', '-e VARNISH_OPTS="-p feature=+esi_disable_xml_check -p default_ttl=30"'],
         dockerfile: 'Dockerfile',
         ports: [`${getPort(result.portRange, '00')}:80`],
@@ -160,32 +163,34 @@ module.exports = (context) => {
 
     if (result.optionI18n) {
       optionalContainers.push({
-        name: 'i18n_api',
+        name: 'nocms_i18n_api',
         image: `${result.dockerRegistry}/i18n_api`,
         ports: [`${getPort(result.portRange, 20)}:3000`],
+        isExternal: true,
       });
     }
 
     if (result.optionFragments) {
       optionalContainers.push({
-        name: 'fragment_api',
-        image: `${result.dockerRegistry}/fragment_api`,
+        name: 'fragments',
+        image: `${result.dockerRegistry}/${result.namespace}_fragment_api`,
         ports: [`${getPort(result.portRange, 21)}:3000`],
       });
     }
 
     if (result.optionsCloudinary) {
       optionalContainers.push({
-        name: 'cloudinary',
+        name: 'nocms_cloudinary',
         image: `${result.dockerRegistry}/cloudinary`,
         ports: [`${getPort(result.portRange, 22)}:3000`],
+        isExternal: true,
       });
     }
 
     if (result.optionsWebApi) {
       optionalContainers.push({
         name: 'web_api',
-        image: `${result.dockerRegistry}/web_api`,
+        image: `${result.dockerRegistry}/${result.namespace}_web_api`,
         ports: [`${getPort(result.portRange, 23)}:3000`],
       });
     }
@@ -204,8 +209,12 @@ module.exports = (context) => {
     const gruntInitCmd = `node ${__dirname}/../node_modules/grunt-init/bin/grunt-init --force ${__dirname}/../template`;
 
     const gruntInitResult = execute(gruntInitCmd);
-    
+
     console.log(gruntInitResult.toString('utf8'));
-  
+    conf.root = process.cwd();
+    conf.currentFile = `${conf.root}/nocms.conf.json`;
+    
+    init(conf);
+    build(conf);
   });
 };

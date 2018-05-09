@@ -2,16 +2,26 @@ const execute = require('../helpers').execute;
 const getImageName = require('../helpers').getImageName;
 const chalk = require('chalk');
 
-module.exports = (context) => {
+module.exports = (context, args) => {
   console.log('');
   console.log(chalk.green('    Stopping containers...'));
 
+  if (args && args[0]) {
+    const container = context.containers.find((c) => c.name === args[0]);
+    if (container) {
+      console.log(chalk.green('     Stopping single container...'));
+      execute(`docker rm -f ${container.name}`);
+    } else {
+      console.log(chalk.red(`     Could not find container ${args[0]}`));
+    }
+    return;
+  }
+
   context.containers.forEach((container) => {
-    console.log('    Stopping ' + container.name);
     const name = container.name;
-    const localName = getImageName(container, true);
-    execute(`docker rm -f ${localName.replace(/_dev$/, '').replace(/_/g, '-')}`);
-    execute(`docker rm -f ${name.replace(/_/g, '-')}`);
+    console.log('    Stopping ' + name);
+    
+    execute(`docker rm -f ${name}`);
   })
 
   console.log('');
