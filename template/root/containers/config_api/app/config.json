@@ -1,8 +1,8 @@
 {
   "default": {
-    "NAMESPACE": "{%= namespace %}-local",
+    "NAMESPACE": "fk-sodvin-local",
     "FEATURES": {
-
+      
     },
     "DATABASE_HOST": "http://elasticsearch:9200",
     "LOG_CONFIG": {
@@ -15,10 +15,46 @@
         "all": ["console"],
         "error": { "file": "/log/error.log" }
       }
-    }
+    },
+    "PUBLISHER_LOGIN_URL":"/publishing",
+    "PUBLISHER_LOGOUT_URL":"/publishing/logout",
+    "TOKEN_REFRESH_URL": "/api/login/refresh",
+
+    "AUTHENTICATION_COOKIE_NAME": "nocms-authenticated",
+    "NOCMS_USER_INFO_COOKIE_NAME": "nocms-user",
+    "USER_COOKIE_NAME": "end-user-authenticated",
+    "TOKEN_SECRET": "OjmXQsAYTxpkT9sKjMHkELuq9cGXZujgOV7q4GUNisTgQTfqn3PUPh8V6maEhdbJwpGhTRcj/UlOdOR6o3PcpqMvHgth+yUSBlIhJmIGkwvc32L0d4OkXn5yJKWFWL3nXz35wXnglHRoBKf1M995oA==",
+
+    "MESSAGE_API":"http://nocms-message-api:3000",
+    "IMAGE_API": "http://nocms-cloudinary:3000",
+    "I18N_API": "http://nocms-i18n-api:3000",
+    "PAGE_SERVICE": "http://nocms-page:3000",
+
+    "WEB_API": "/api",
+
+    "I18N_LANGUAGES": ["no", "en"],
+    "I18N_DATABASE_INDEX": "i18n",
+
+    "CLOUDINARY_CLOUD_NAME": "",
+    "CLOUDINARY_API_KEY": "your encrypted api key",
+    "CLOUDINARY_API_SECRET": "your encrypted api secret",
+
+    "RABBIT_MQ_LOGIN": "+bTn/wkpM5+QS4+Q9gMWxBW6LsV6rNhudCOu6+1RpRk=",
+    "RABBIT_MQ_PASSWORD": "HRC93adrHCHbnDVCVa/jREaWBhUwLWgaHXxkiF4WqCg=",
+    "RABBIT_MQ_VHOST": "/",
+    "RABBIT_MQ_EXCHANGE_NAME": "nocms",
+    "RABBIT_MQ_HOST": "rabbitmq",
+    "RABBIT_MQ_HEARTBEAT": 60,
+    
+    "PAGE_DATABASE": "elasticsearch",
+    "PAGE_DATABASE_HOST": "http://elasticsearch:9200",
+    "PAGE_DATABASE_INDEX": "page",
+    "PAGE_RABBIT_MQ_QUEUE": "nocms_page",
+    
+    "VARNISH_HOST": "http://varnish"
   },
   "test": {
-    "NAMESPACE": "{%= namespace %}-test",
+    "NAMESPACE": "fk-sodvin-test",
     "FEATURES": {},
     "LOG_CONFIG": {
       "logLevel": "debug",
@@ -29,7 +65,7 @@
     }
   },
   "prod": {
-    "NAMESPACE": "{%= namespace %}-prod",
+    "NAMESPACE": "fk-sodvin-prod",
     "FEATURES": {},
     "LOG_CONFIG": {
       "logAsJson": true,

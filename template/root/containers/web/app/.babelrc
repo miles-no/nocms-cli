@@ -1,7 +1,12 @@
 {
   "presets": [
-    "@babel/env",
+    ["@babel/env", {
+      "targets": {
+        "node": "9.5.0"
+      },
+      "debug": false
+    }],
     "@babel/react"
   ],
-  "plugins": ["@babel/plugin-proposal-object-rest-spread"]  
+  "plugins": ["@babel/plugin-proposal-object-rest-spread"]
 }

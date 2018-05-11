@@ -12,9 +12,9 @@ configApiServer
 
   // .setAdapter('authorization_api',  require('./adapters/authorization_api'))
   // .setAdapter('authentication_api', require('./adapters/authentication_api'))
-  // .setAdapter('cloudinary',         require('./adapters/cloudinary'))
-  // .setAdapter('i18n_api',           require('./adapters/i18n_api'))
-  // .setAdapter('message_api',        require('./adapters/message_api'))
+  .setAdapter('cloudinary',         require('./adapters/cloudinary'))
+  .setAdapter('i18n_api',           require('./adapters/i18n_api'))
+  .setAdapter('message_api',        require('./adapters/message_api'))
 
   
   .on('warning', logger.warn)

@@ -1,0 +1,39 @@
+{
+  "name": "web_api",
+  "version": "0.0.1",
+  "author": {
+    "name": "Miles",
+    "email": "webteam@miles.no"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.7.1",
+    "dotenv": "^2.0.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "express": "^4.14.0",
+    "express-correlation-id": "^1.0.2",
+    "nocms-auth": "^1.0.0",
+    "nocms-config-client": "^1.1.0",
+    "nocms-data-providers": "^1.1.0",
+    "nocms-express-correlation-id": "^1.0.2",
+    "nocms-express-logger": "^2.0.0",
+    "nocms-logger": "^4.2.3",
+    "superagent": "^1.8.3"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-webteam": "^1.2.0",
+    "eslint-plugin-import": "^2.7.0",
+    "tape": "^4.5.1"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "node ./test",
+    "dev": "nodemon index.js",
+    "watch": "webpack -d -w"
+  },
+  "main": "index.js",
+  "node_version": "^4.2.2"
+}

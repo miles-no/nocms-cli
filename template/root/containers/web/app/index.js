@@ -8,7 +8,7 @@ config.init('web').then((cfg) => {
   process.on('uncaughtException', (exception) => {
     logger.error('Uncaught exception', exception);
   });
-  require('./src/'); // eslint-disable-line
+  require('./src/server'); // eslint-disable-line
 }).catch((exception) => {
   console.log('Could not start server', exception); // eslint-disable-line
 });

@@ -1,4 +1,3 @@
-const config = require('nocms-config-client');
 const app = require('express')();
 const logger = require('nocms-logger');
 const cookieParser = require('cookie-parser');

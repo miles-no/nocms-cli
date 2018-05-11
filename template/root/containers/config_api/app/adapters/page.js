@@ -7,8 +7,7 @@ module.exports = function adapter(remoteConfig) {
     },
     databaseUrl: `${remoteConfig.DATABASE_HOST}/${remoteConfig.NAMESPACE}-${remoteConfig.PAGE_DATABASE_INDEX}`,
     hosts: {
-      varnish: remoteConfig.PAGE_VARNISH_HOST,
-      sibling: remoteConfig.PAGE_SIBLING_NODE,
+      varnish: remoteConfig.VARNISH_HOST,
     },
     mq: {
       host: remoteConfig.RABBIT_MQ_HOST,
@@ -20,7 +19,6 @@ module.exports = function adapter(remoteConfig) {
       heartbeat: remoteConfig.RABBIT_MQ_HEARTBEAT,
     },
     adminTokenSecret: remoteConfig.TOKEN_SECRET,
-    siblingNode: remoteConfig.PAGE_SIBLING_NODE,
     logConfig: remoteConfig.LOG_CONFIG,
   };
 
