@@ -1,6 +1,22 @@
 
 # nocms-cli
 
+## TODO
+
+* Create package nocms-api-server to reduce boilerplate within Fragments, WebApi and other API containers.
+* Create nocms-build to handle bundling of js and css in web containers
+* Put important config values in CLI promots
+* Create config validation for common containers
+* I nocms-config-client: setDefaults
+* Auth
+
+Prompts:
+RabbitMQ-login
+RabbitMQ-passord
+TokenSecret
+
+
+
 Command line interface for NoCMS projects.
 
 ## Installation

@@ -27,7 +27,7 @@ const cloneRepo = (context, container) => {
 module.exports = (context, args) => {
   console.log('');
   console.log(chalk.green('     Cloning or updating containers...'));  
-  
+
   if (args && args[0]) {
     const c = context.containers.find((c) => c.name === args[0]);
     if (!c) {

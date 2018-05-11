@@ -2,7 +2,7 @@ vcl 4.0;
 import std;
 
 backend default {
-  .host = "main-web-server";
+  .host = "web";
   .port = "3000";
 }
 
@@ -11,33 +11,13 @@ backend authentication_api {
   .port = "3000";
 }
 
-backend people_admin {
-  .host = "people-admin";
-  .port = "3000";
-}
-
-backend smiles_admin {
-  .host = "smiles-admin";
-  .port = "3000";
-}
-
-backend miles_camp {
-  .host = "miles-camp";
-  .port = "3000";
-}
-
-backend miles_camp_admin {
-  .host = "miles-camp-admin";
-  .port = "3000";
-}
-
 backend i18n {
   .host = "i18n-api";
   .port = "3000";
 }
 
-backend fragment_api {
-  .host = "fragment-api";
+backend fragments {
+  .host = "fragments";
   .port = "3000";
 }
 
@@ -46,14 +26,14 @@ backend message_api {
   .port = "3000";
 }
 
-backend widget_api {
-  .host = "widget-api";
+backend web_api {
+  .host = "web-api";
   .port = "3000";
 }
 
 acl banners {
   "page-service";
-  "main-web-server";
+  "web";
 }
 
 sub vcl_recv {
@@ -82,42 +62,21 @@ sub vcl_recv {
     }
   }
 
-  if (req.http.X-Forwarded-For) {
-    set req.http.X-Client-IP = req.http.X-Forwarded-For + ", " + regsub(client.ip, ":.*", "");
-    unset req.http.X-Forwarded-For;
-  } else {
-    set req.http.X-Client-IP = regsub(client.ip, ":.*", "");
-  }
-
   if (req.url ~ "^/message") {
     set req.backend_hint = message_api;
 
   }else if (req.url ~ "^/fragments/") {
-    set req.backend_hint = fragment_api;
-
-  }else if (req.url ~ "^/applications/people-admin") {
-    set req.backend_hint = people_admin;
-
-  }else if (req.url ~ "^/applications/smiles-admin") {
-    set req.backend_hint = smiles_admin;
-
-  }else if (req.url ~ "^/camp-admin") {
-    set req.backend_hint = miles_camp_admin;
-
-  }else if (req.url ~ "^/camp") {
-    set req.backend_hint = miles_camp;
+    set req.backend_hint = fragments;
 
   }
   else if (req.url ~ "^/applications/i18n") {
     set req.backend_hint = i18n;
 
-  }else if (req.url ~ "^/api/login") {
-    set req.backend_hint = authentication_api;
-  }else if (req.url ~ "^/api/logout") {
+  }else if (req.url ~ "^/api/(login|logout)") {
     set req.backend_hint = authentication_api;
 
-  }else if (req.url ~ "^/widgets/") {
-    set req.backend_hint = widget_api;
+  }else if (req.url ~ "^/api/") {
+    set req.backend_hint = web_api;
 
   } else {
     set req.backend_hint = default;
@@ -148,7 +107,7 @@ sub vcl_backend_response {
     set beresp.ttl = 0s;
   }
   // Enable ESI processing
-  if(bereq.backend == default || bereq.backend == fragment_api){
+  if(bereq.backend == default || bereq.backend == fragments){
     set beresp.do_esi = true;
   }
 

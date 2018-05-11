@@ -1,0 +1,32 @@
+{
+  "name": "fragment_api",
+  "version": "0.0.1",
+  "description": "NoCMS service for providing esi fragments",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon -L --delay 4 index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/nocms/fragment_api.git"
+  },
+  "author": "Jørgen Landsnes",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/nocms/fragment_api#readme",
+  "devDependencies": {
+    "eslint": "^4.8.0",
+    "eslint-config-webteam": "^2.0.0",
+    "eslint-plugin-import": "^2.2.0"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "express-correlation-id": "^1.0.2",
+    "moment": "^2.19.3",
+    "nocms-config-client": "^1.1.0",
+    "nocms-express-logger": "^2.0.1",
+    "nocms-logger": "^4.2.3",
+    "superagent": "^3.6.3"
+  }
+}

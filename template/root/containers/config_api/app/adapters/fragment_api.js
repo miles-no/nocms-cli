@@ -1,8 +1,7 @@
 module.exports = function adapter(remoteConfig) {
   const config = {
+    sites: remoteConfig.SITE_LIST,
     logConfig: remoteConfig.LOG_CONFIG,
-    cloudinaryHost: remoteConfig.WIDGET_API_CLOUDINARY_HOST,
-    pageService: remoteConfig.SERVICES.page,
   };
 
   const encrypted = [];

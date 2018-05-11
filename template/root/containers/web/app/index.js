@@ -3,7 +3,7 @@ const logger = require('nocms-logger');
 
 global.environment = 'server';
 
-config.init('main_web_server').then((cfg) => {
+config.init('web').then((cfg) => {
   logger.setConfig(cfg.logConfig);
   process.on('uncaughtException', (exception) => {
     logger.error('Uncaught exception', exception);

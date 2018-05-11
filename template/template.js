@@ -25,8 +25,8 @@ exports.template = function(grunt, init, done){
         Object.assign(props, nocmsConf, { containerNames, imageNames });
 
         var files = init.filesToCopy(props);
-        // init.copyAndProcess(files, props);
-        console.log(props, '---------------------------')
+        init.copyAndProcess(files, props);
+
         // All done!
         done();
   });
