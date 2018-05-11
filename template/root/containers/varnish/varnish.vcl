@@ -7,7 +7,7 @@ backend default {
 }
 
 backend authentication_api {
-  .host = "authentication-api";
+  .host = "nocms-authentication-api";
   .port = "3000";
 }
 

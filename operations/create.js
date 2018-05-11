@@ -150,6 +150,17 @@ module.exports = (context) => {
         ports: [`${getPort(result.portRange, 3)}:3000`],
         isExternal: true,
       },
+      {
+        name: 'nocms_authentication_api',
+        image: `${result.dockerRegistry}/authentication_api`,
+        ports: [`${getPort(result.portRange, 5)}:3000`],
+        isExternal: true,
+      },
+      {
+        name: 'authorization_api',
+        image: `${result.dockerRegistry}/${result.namespace}_authorization_api`,
+        ports: [`${getPort(result.portRange, 6)}:3000`],
+      }
     ];
     const optionalContainers = [];
     const lastContainers = [

@@ -16,19 +16,41 @@
         "error": { "file": "/log/error.log" }
       }
     },
+    "SITE_LIST": [
+      {
+        "name": "no",
+        "domains": [""],
+        "lang": "no"
+      }
+    ],
+
     "PUBLISHER_LOGIN_URL":"/publishing",
     "PUBLISHER_LOGOUT_URL":"/publishing/logout",
     "TOKEN_REFRESH_URL": "/api/login/refresh",
 
+    "ADMIN_USE_SECURE_COOKIE": false,
+    "ADMIN_AUTH0_DOMAIN": "",
+    "ADMIN_AUTH0_CLIENT_SECRET": "",
+    "ADMIN_AUTH0_CLIENT_ID": "",
+    "AUTH0_SCOPES": "openid email profile",
+    "AUTH0_CALLBACK_URL": "/api/login",
+    "AUTHORIZATION_TOKEN_TTL": "24h",
+    "AUTHORIZATION_REAUTH_TOKEN_TTL": "30d",
+    "AUTHORIZATION_COOKIE_TTL": 2678400000,
     "AUTHENTICATION_COOKIE_NAME": "nocms-authenticated",
     "NOCMS_USER_INFO_COOKIE_NAME": "nocms-user",
     "USER_COOKIE_NAME": "end-user-authenticated",
     "TOKEN_SECRET": "OjmXQsAYTxpkT9sKjMHkELuq9cGXZujgOV7q4GUNisTgQTfqn3PUPh8V6maEhdbJwpGhTRcj/UlOdOR6o3PcpqMvHgth+yUSBlIhJmIGkwvc32L0d4OkXn5yJKWFWL3nXz35wXnglHRoBKf1M995oA==",
 
+    "USERS": [
+      { "userId": "admin@miles.no", "claims": { "publisher": true, "admin": true, "developer": true } }
+    ],
+
     "MESSAGE_API":"http://nocms-message-api:3000",
     "IMAGE_API": "http://nocms-cloudinary:3000",
     "I18N_API": "http://nocms-i18n-api:3000",
     "PAGE_SERVICE": "http://nocms-page:3000",
+    "AUTHORIZATION_API": "http://authorization-api:3000",
 
     "WEB_API": "/api",
 
