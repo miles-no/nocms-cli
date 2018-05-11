@@ -6,6 +6,7 @@ const prompt = require('prompt');
 const fs = require('fs');
 const build = require('./build');
 const init = require('./init');
+const install = require('./install');
 
 const getNetwork = (portRange) => {
   const match = portRange.match(/^(\d{2,3})00$/);
@@ -216,5 +217,6 @@ module.exports = (context) => {
     
     init(conf);
     build(conf);
+    install(conf);
   });
 };
