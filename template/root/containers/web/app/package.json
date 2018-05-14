@@ -24,7 +24,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.0.0-beta.34",
-    "nocms-config-client": "^1.1.0",
+    "nocms-config-client": "^2.0.0",
     "nocms-events": "^1.2.2",
     "nocms-i18n": "^1.0.3",
     "nocms-logger": "^4.2.3",

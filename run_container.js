@@ -24,7 +24,6 @@ module.exports = (context, container, runLocal) => {
   const volumeParams = volumes.reduce((str, volume) => { return '-v ' + volume + ' ' + str; }, '');
 
   flags.push(`-e CRYPTEX_KEYSOURCE_PLAINTEXT_KEY=${process.env.CRYPTEX_KEYSOURCE_PLAINTEXT_KEY}`);
-  flags.push(`-e CONFIG_API_HOST="http://config-api:3000"`);
   flags.push(`-e NODE_ENV=${process.env.NODE_ENV}`);
   flags.push(`-e NPM_AUTH=${process.env.NPM_AUTH}`);
 

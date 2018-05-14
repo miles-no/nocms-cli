@@ -23,8 +23,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
     "express-correlation-id": "^1.0.2",
-    "moment": "^2.19.3",
-    "nocms-config-client": "^1.1.0",
+    "nocms-config-client": "^2.0.0",
     "nocms-express-logger": "^2.0.1",
     "nocms-logger": "^4.2.3",
     "superagent": "^3.6.3"

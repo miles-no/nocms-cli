@@ -18,8 +18,8 @@ module.exports = function adapter(remoteConfig) {
   };
 
   const encrypted = [
-    'auth0ClientSecret',
-    'tokenSecret',
+    // 'auth0ClientSecret',
+    // 'tokenSecret',
   ];
 
   return { config, encrypted };

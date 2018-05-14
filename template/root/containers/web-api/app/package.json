@@ -15,7 +15,7 @@
     "express": "^4.14.0",
     "express-correlation-id": "^1.0.2",
     "nocms-auth": "^1.0.0",
-    "nocms-config-client": "^1.1.0",
+    "nocms-config-client": "^2.0.0",
     "nocms-data-providers": "^1.1.0",
     "nocms-express-correlation-id": "^1.0.2",
     "nocms-express-logger": "^2.0.0",

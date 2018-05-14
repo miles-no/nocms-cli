@@ -1,6 +1,6 @@
 {
   "default": {
-    "NAMESPACE": "fk-sodvin-local",
+    "NAMESPACE": "{%= namespace %}-local",
     "FEATURES": {
       
     },
@@ -58,8 +58,8 @@
     "I18N_DATABASE_INDEX": "i18n",
 
     "CLOUDINARY_CLOUD_NAME": "",
-    "CLOUDINARY_API_KEY": "your encrypted api key",
-    "CLOUDINARY_API_SECRET": "your encrypted api secret",
+    "CLOUDINARY_API_KEY": "",
+    "CLOUDINARY_API_SECRET": "",
 
     "RABBIT_MQ_LOGIN": "+bTn/wkpM5+QS4+Q9gMWxBW6LsV6rNhudCOu6+1RpRk=",
     "RABBIT_MQ_PASSWORD": "HRC93adrHCHbnDVCVa/jREaWBhUwLWgaHXxkiF4WqCg=",
@@ -72,11 +72,13 @@
     "PAGE_DATABASE_HOST": "http://elasticsearch:9200",
     "PAGE_DATABASE_INDEX": "page",
     "PAGE_RABBIT_MQ_QUEUE": "nocms_page",
+
+    "MESSAGE_API_RABBIT_MQ_QUEUE": "message_api",
     
     "VARNISH_HOST": "http://varnish"
   },
   "test": {
-    "NAMESPACE": "fk-sodvin-test",
+    "NAMESPACE": "{%= namespace %}-test",
     "FEATURES": {},
     "LOG_CONFIG": {
       "logLevel": "debug",
@@ -87,7 +89,7 @@
     }
   },
   "prod": {
-    "NAMESPACE": "fk-sodvin-prod",
+    "NAMESPACE": "{%= namespace %}-prod",
     "FEATURES": {},
     "LOG_CONFIG": {
       "logAsJson": true,

@@ -1,5 +1,5 @@
 {
-  "name": "config_api",
+  "name": "config-api",
   "version": "1.0.0",
   "description": "Config API for NoCMS",
   "main": "index.js",

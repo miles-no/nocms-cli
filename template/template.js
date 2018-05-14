@@ -14,15 +14,8 @@ exports.template = function(grunt, init, done){
           webApi: `${namespaceUnderscore}_web_api`,
           varnish: `${namespaceUnderscore}_varnish`,
         };
-        const containerNames = {
-          web: `${nocmsConf.namespace}-web`,
-          config: `${nocmsConf.namespace}-config`,
-          fragments: `${nocmsConf.namespace}-fragments`,
-          webApi: `${nocmsConf.namespace}-web-api`,
-          varnish: `${nocmsConf.namespace}-varnish`,
-        };
 
-        Object.assign(props, nocmsConf, { containerNames, imageNames });
+        Object.assign(props, nocmsConf, { imageNames });
 
         var files = init.filesToCopy(props);
         init.copyAndProcess(files, props);

@@ -126,15 +126,15 @@ module.exports = (context) => {
         flags: ['--user=0', `-e ES_JAVA_OPTS='-Xms512m -Xmx512m'`],
         ports: [`${getPort(result.portRange, 50)}:9200`, `${getPort(result.portRange, 51)}:9300`],
         isExternal: true,
-        volumes: ['esdata:/usr/share/elasticsearch/data'],
+        volumes: [`esdata-${result.namespace}:/usr/share/elasticsearch/data`],
       },
       {
-        name: 'config_api',
+        name: 'config-api',
         image: `${result.dockerRegistry}/${result.namespace}_config_api`,
         ports: [`${getPort(result.portRange, 4)}:3000`],
       },
       {
-        name: 'nocms_page',
+        name: 'nocms-page',
         image: `${result.dockerRegistry}/page_service`,
         ports: [`${getPort(result.portRange, 2)}:3000`],
         isExternal: true,
@@ -145,19 +145,19 @@ module.exports = (context) => {
         ports: [`${getPort(result.portRange, 1)}:3000`],
       },
       {
-        name: 'nocms_message_api',
+        name: 'nocms-message-api',
         image: `${result.dockerRegistry}/message_api`,
         ports: [`${getPort(result.portRange, 3)}:3000`],
         isExternal: true,
       },
       {
-        name: 'nocms_authentication_api',
+        name: 'nocms-authentication-api',
         image: `${result.dockerRegistry}/authentication_api`,
         ports: [`${getPort(result.portRange, 5)}:3000`],
         isExternal: true,
       },
       {
-        name: 'authorization_api',
+        name: 'authorization-api',
         image: `${result.dockerRegistry}/${result.namespace}_authorization_api`,
         ports: [`${getPort(result.portRange, 6)}:3000`],
       }
@@ -175,7 +175,7 @@ module.exports = (context) => {
 
     if (result.optionI18n) {
       optionalContainers.push({
-        name: 'nocms_i18n_api',
+        name: 'nocms-i18n-api',
         image: `${result.dockerRegistry}/i18n_api`,
         ports: [`${getPort(result.portRange, 20)}:3000`],
         isExternal: true,
@@ -192,7 +192,7 @@ module.exports = (context) => {
 
     if (result.optionsCloudinary) {
       optionalContainers.push({
-        name: 'nocms_cloudinary',
+        name: 'nocms-cloudinary',
         image: `${result.dockerRegistry}/cloudinary`,
         ports: [`${getPort(result.portRange, 22)}:3000`],
         isExternal: true,
@@ -201,7 +201,7 @@ module.exports = (context) => {
 
     if (result.optionsWebApi) {
       optionalContainers.push({
-        name: 'web_api',
+        name: 'web-api',
         image: `${result.dockerRegistry}/${result.namespace}_web_api`,
         ports: [`${getPort(result.portRange, 23)}:3000`],
       });
