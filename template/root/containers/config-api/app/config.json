@@ -28,6 +28,7 @@
     "PUBLISHER_LOGOUT_URL":"/publishing/logout",
     "TOKEN_REFRESH_URL": "/api/login/refresh",
 
+    "TRANSFER_PROTOCOL": "http",
     "ADMIN_USE_SECURE_COOKIE": false,
     "ADMIN_AUTH0_DOMAIN": "",
     "ADMIN_AUTH0_CLIENT_SECRET": "",
@@ -97,6 +98,7 @@
       "output": {
         "all": ["console"]
       }
-    }
+    },
+    "TRANSFER_PROTOCOL": "https"
   }
 }

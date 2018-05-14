@@ -3,6 +3,7 @@ module.exports = function adapter(remoteConfig) {
     sites: remoteConfig.SITE_LIST,
     tokenSecret: remoteConfig.TOKEN_SECRET,
     logConfig: remoteConfig.LOG_CONFIG,
+    transferProtocol: remoteConfig.TRANSFER_PROTOCOL,
     auth0Domain: remoteConfig.ADMIN_AUTH0_DOMAIN,
     auth0ClientSecret: remoteConfig.ADMIN_AUTH0_CLIENT_SECRET,
     auth0ClientId: remoteConfig.ADMIN_AUTH0_CLIENT_ID,
