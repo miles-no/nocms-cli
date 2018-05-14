@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: authorization_api
-  namespace: miles-no-prod
+  namespace: {%= namespace %}-prod
 spec:
   replicas: 1
   strategy:
@@ -20,7 +20,7 @@ spec:
         milescloud/node-type: normal
       containers:
       - name: authorization-api
-        image: miles-nocms.jfrog.io/authorization-api:${DOCKER_TAG}
+        image: miles-nocms.jfrog.io/{%= imageNames.config %}:${DOCKER_TAG}
         env:
           - name: NODE_ENV
             value: prod
