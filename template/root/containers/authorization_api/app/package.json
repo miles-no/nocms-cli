@@ -1,0 +1,40 @@
+{
+  "name": "authorization_api",
+  "title": "NoCMS Authorization API",
+  "description": "API for authenticating users in NoCMS",
+  "version": "0.0.1",
+  "author": {
+    "name": "Magne Skutle",
+    "email": "magne.skutle@miles.no"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:nocms/authorization_api.git"
+  },
+  "dependencies": {
+    "btoa": "^1.1.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-healthcheck": "^0.1.0",
+    "jsonwebtoken": "^7.0.0",
+    "nocms-config-client": "^1.1.0",
+    "nocms-express-correlation-id": "^1.0.2",
+    "nocms-express-logger": "^2.0.1",
+    "nocms-express-metrics": "^2.0.3",
+    "nocms-logger": "^4.2.3",
+    "passport": "^0.3.2",
+    "passport-auth0": "^0.5.2",
+    "prom-client": "^10.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.12.2",
+    "eslint-config-webteam": "^1.2.0",
+    "eslint-plugin-import": "^2.2.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon -L --delay 4 index.js"
+  },
+  "main": "index.js",
+  "node_version": "^4.2.2"
+}

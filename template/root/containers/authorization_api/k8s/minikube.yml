@@ -1,0 +1,67 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: admin-login
+  namespace: miles-no-prod
+spec:
+  template:
+    metadata:
+      labels:
+        run: admin-login
+        env: prod
+    spec:
+      nodeSelector:
+        milescloud/node-type: normal
+      containers:
+      - name: admin-login
+        image: miles-nocms.jfrog.io/nocms_base_dev
+        env:
+          - name: NODE_ENV
+            value: prod
+          - name: CRYPTEX_KEYSOURCE_PLAINTEXT_KEY
+            valueFrom:
+              secretKeyRef:
+                name: nocms-secrets
+                key: cryptex-keysource-key
+          - name: CONFIG_API_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: nocms-config
+                key: config-api-host
+        volumeMounts:
+          - mountPath: /usr/src/app
+            name: dev-storage
+            subPath: containers/admin_login/app
+          - mountPath: /log
+            name: dev-storage
+            subPath: containers/admin_login/logs
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 50m
+            memory: 10Mi
+      volumes:
+        - name: dev-storage
+          hostPath:
+            path: {{NOCMS_PROJECT_ROOT}}
+      imagePullSecrets:
+      - name: gcr-registry
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin-login
+  namespace: miles-no-prod
+spec:
+  ports:
+  - name: "http"
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    run: admin-login
