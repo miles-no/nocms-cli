@@ -7,12 +7,12 @@ backend default {
 }
 
 backend authentication_api {
-  .host = "nocms-authentication-api";
+  .host = "authentication-api";
   .port = "3000";
 }
 
 backend i18n {
-  .host = "nocms-i18n-api";
+  .host = "i18n-api";
   .port = "3000";
 }
 
@@ -22,7 +22,7 @@ backend fragments {
 }
 
 backend message_api {
-  .host = "nocms-message-api";
+  .host = "message-api";
   .port = "3000";
 }
 
@@ -32,7 +32,7 @@ backend web_api {
 }
 
 acl banners {
-  "nocms-page";
+  "page-service";
   "web";
 }
 
