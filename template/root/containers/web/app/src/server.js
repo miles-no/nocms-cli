@@ -24,6 +24,7 @@ const initConfig = {
   pageService: config.pageService,
   i18nApi: config.i18nApi,
   languageList: config.languageList,
+  commonAppScript: `/assets/js/commons.js?v=${timeStamp}`,
   clientAppScript: `/assets/js/nocms.js?v=${timeStamp}`,
   mainCss: `/assets/css/main.css?v=${timeStamp}`,
   adminAppCss: `/assets/css/admin.css?v=${timeStamp}`,
