@@ -57,6 +57,8 @@
 
     "I18N_LANGUAGES": ["no", "en"],
     "I18N_DATABASE_INDEX": "i18n",
+    "I18N_API_DATABASE": "elasticsearch",
+    "I18N_API_DATABASE_HOST": "http://elasticsearch:9200",
 
     "CLOUDINARY_CLOUD_NAME": "",
     "CLOUDINARY_API_KEY": "",
@@ -101,7 +103,7 @@
     },
     "PAGE_DATABASE_HOST": "https://vpc-nocms-elasticsearch-kvd55evi6p4l7g3xddqq2p2iei.eu-central-1.es.amazonaws.com",
     "DATABASE_HOST": "https://vpc-nocms-elasticsearch-kvd55evi6p4l7g3xddqq2p2iei.eu-central-1.es.amazonaws.com",
-    "I18N_DATABASE_HOST": "https://vpc-nocms-elasticsearch-kvd55evi6p4l7g3xddqq2p2iei.eu-central-1.es.amazonaws.com",
+    "I18N_API_DATABASE_HOST": "https://vpc-nocms-elasticsearch-kvd55evi6p4l7g3xddqq2p2iei.eu-central-1.es.amazonaws.com",
     "TRANSFER_PROTOCOL": "https"
   }
 }
