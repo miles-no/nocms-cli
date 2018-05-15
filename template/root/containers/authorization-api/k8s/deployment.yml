@@ -20,7 +20,7 @@ spec:
         milescloud/node-type: normal
       containers:
       - name: authorization-api
-        image: miles-nocms.jfrog.io/{%= imageNames.config %}:${DOCKER_TAG}
+        image: miles-nocms.jfrog.io/{%= imageNames.authorization %}:${DOCKER_TAG}
         env:
           - name: NODE_ENV
             value: prod

@@ -99,6 +99,9 @@
         "all": ["console"]
       }
     },
+    "PAGE_DATABASE_HOST": "https://vpc-nocms-elasticsearch-kvd55evi6p4l7g3xddqq2p2iei.eu-central-1.es.amazonaws.com",
+    "DATABASE_HOST": "https://vpc-nocms-elasticsearch-kvd55evi6p4l7g3xddqq2p2iei.eu-central-1.es.amazonaws.com",
+    "I18N_DATABASE_HOST": "https://vpc-nocms-elasticsearch-kvd55evi6p4l7g3xddqq2p2iei.eu-central-1.es.amazonaws.com",
     "TRANSFER_PROTOCOL": "https"
   }
 }
