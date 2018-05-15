@@ -13,6 +13,7 @@ exports.template = function(grunt, init, done){
           fragments: `${namespaceUnderscore}_fragments`,
           webApi: `${namespaceUnderscore}_web_api`,
           varnish: `${namespaceUnderscore}_varnish`,
+          authorization: `${namespaceUnderscore}_authorization`,
         };
 
         Object.assign(props, nocmsConf, { imageNames });

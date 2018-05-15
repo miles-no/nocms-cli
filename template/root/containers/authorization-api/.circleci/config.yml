@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: docker:stable-git
         environment:
-          IMAGE_NAME: authorization_api
+          IMAGE_NAME: {%= imageNames.authorization %}
 
     working_directory: ~/repo
 
@@ -81,7 +81,7 @@ jobs:
 
 workflows:
   version: 2
-  authorization_api:
+  test-and-release:
     jobs:
       - build:
           context: org-global

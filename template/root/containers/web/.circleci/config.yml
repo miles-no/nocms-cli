@@ -81,7 +81,7 @@ jobs:
 
 workflows:
   version: 2
-  test_and_release:
+  test-and-release:
     jobs:
       - build:
           context: org-global

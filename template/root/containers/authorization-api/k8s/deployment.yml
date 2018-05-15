@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: authorization_api
+  name: authorization-api
   namespace: {%= namespace %}-prod
 spec:
   replicas: 1
