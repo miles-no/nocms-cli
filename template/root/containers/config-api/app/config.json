@@ -55,6 +55,14 @@
     "MESSAGE_API_ENDPOINT": "/message",
     "WEB_API_ENDPOINT": "/api",
 
+    "SEARCH_API_URI": "http://search-api:3000",
+    "SEARCH_API_SITE_TO_INDEX": "http://varnish:80",
+    "SEARCH_API_CRAWLER_PATHS": ["/"],
+    "SEARCH_API_CRAWLER_FOLLOW_LINKS": true,
+    "SEARCH_API_CRAWLER_CONTENT_SELECTOR": "#mainContent",
+    "SEARCH_API_DATABASE_INDEX": "search",
+    "SEARCH_API_RABBIT_MQ_QUEUE": "search_api",
+
     "I18N_LANGUAGES": ["no", "en"],
     "I18N_DATABASE_INDEX": "i18n",
     "I18N_API_DATABASE": "elasticsearch",

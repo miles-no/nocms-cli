@@ -14,8 +14,8 @@ configApiServer
   .setAdapter('cloudinary',         require('./adapters/cloudinary'))
   .setAdapter('i18n_api',           require('./adapters/i18n_api'))
   .setAdapter('message_api',        require('./adapters/message_api'))
+  .setAdapter('search_api',         require('./adapters/search_api'))
 
-  
   .on('warning', logger.warn)
   .on('error', logger.error)
   .on('info', logger.info)

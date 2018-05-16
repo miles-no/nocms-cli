@@ -97,6 +97,16 @@ module.exports = (context) => {
           return boolMap[value];
         },
       },
+      optionsSearchApi: {
+        description: 'Do you want a search api?',
+        type: 'string',
+        conform: function (value) {
+          return boolValues.indexOf(value) >= 0;
+        },
+        before: (value) => {
+          return boolMap[value];
+        },
+      },
       dockerRegistry: {
         default: 'miles-nocms.jfrog.io',
         type: 'string',
@@ -134,7 +144,7 @@ module.exports = (context) => {
         ports: [`${getPort(result.portRange, 4)}:3000`],
       },
       {
-        name: 'nocms-page',
+        name: 'page-service',
         image: `${result.dockerRegistry}/page_service`,
         ports: [`${getPort(result.portRange, 2)}:3000`],
         isExternal: true,
@@ -145,13 +155,13 @@ module.exports = (context) => {
         ports: [`${getPort(result.portRange, 1)}:3000`],
       },
       {
-        name: 'nocms-message-api',
+        name: 'message-api',
         image: `${result.dockerRegistry}/message_api`,
         ports: [`${getPort(result.portRange, 3)}:3000`],
         isExternal: true,
       },
       {
-        name: 'nocms-authentication-api',
+        name: 'authentication-api',
         image: `${result.dockerRegistry}/authentication_api`,
         ports: [`${getPort(result.portRange, 5)}:3000`],
         isExternal: true,
@@ -175,7 +185,7 @@ module.exports = (context) => {
 
     if (result.optionI18n) {
       optionalContainers.push({
-        name: 'nocms-i18n-api',
+        name: 'i18n-api',
         image: `${result.dockerRegistry}/i18n_api`,
         ports: [`${getPort(result.portRange, 20)}:3000`],
         isExternal: true,
@@ -192,7 +202,7 @@ module.exports = (context) => {
 
     if (result.optionsCloudinary) {
       optionalContainers.push({
-        name: 'nocms-cloudinary',
+        name: 'cloudinary',
         image: `${result.dockerRegistry}/cloudinary`,
         ports: [`${getPort(result.portRange, 22)}:3000`],
         isExternal: true,
@@ -205,6 +215,15 @@ module.exports = (context) => {
         image: `${result.dockerRegistry}/${result.namespace}_web_api`,
         ports: [`${getPort(result.portRange, 23)}:3000`],
       });
+    }
+
+    if (result.optionsSearchApi) {
+      optionalContainers.push({
+        name: 'search-api',
+        image: `${result.dockerRegistry}/search_api`,
+        ports: [`${getPort(result.portRange, 24)}:3000`],
+        isExternal: true,
+      })
     }
 
     const conf = {
