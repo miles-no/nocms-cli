@@ -20,15 +20,15 @@ const port = 3000;
 app.use(cors());
 app.use(cookieParser()); // Only needed if Authorization header is not set
 app.use(readClaims(config.tokenSecret, logger));
-
-app.all(`${mountPoint}/nocms/*`, verifyClaim('admin', logger));
-
 app.use(bodyParser.json());
 app.use(correlator());
 app.use(expressLogger(logger));
 
+/* Only necessary if you are using the publishing interface */
+app.all(`${mountPoint}/nocms/*`, verifyClaim('admin', logger));
 app.get(`${mountPoint}/nocms/export-pages`, exportPages);
 app.get(`${mountPoint}/nocms/get-all-pages`, getAllPages);
 app.get(`${mountPoint}/nocms/page-history`, pageHistory);
+/* Only necessary if you are using the publishing interface */
 
 app.listen(port, () => logger.info(`Server running on port ${port}`));

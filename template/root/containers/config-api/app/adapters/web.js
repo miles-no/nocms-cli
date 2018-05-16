@@ -10,9 +10,9 @@ module.exports = function adapter(remoteConfig) {
     publisherLogoutUrl: remoteConfig.PUBLISHER_LOGOUT_URL,
     languageList: remoteConfig.I18N_LANGUAGES,
     client: {
-      messageApi: remoteConfig.MESSAGE_API,
-      webApi: remoteConfig.WEB_API,
-      imageApi: remoteConfig.IMAGE_API,
+      messageApi: remoteConfig.MESSAGE_API_ENDPOINT,
+      webApi: remoteConfig.WEB_API_ENDPOINT,
+      imageApi: remoteConfig.IMAGE_API_ENDPOINT,
       publisherLoginUrl: remoteConfig.PUBLISHER_LOGIN_URL,
       tokenRefreshUrl: remoteConfig.TOKEN_REFRESH_URL,
       publisherLogoutUrl: remoteConfig.PUBLISHER_LOGOUT_URL,

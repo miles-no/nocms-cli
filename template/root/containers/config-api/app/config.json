@@ -47,13 +47,13 @@
       { "userId": "admin@miles.no", "claims": { "publisher": true, "admin": true, "developer": true } }
     ],
 
-    "MESSAGE_API":"http://message-api:3000",
-    "IMAGE_API": "http://cloudinary:3000",
     "I18N_API": "http://i18n-api:3000",
     "PAGE_SERVICE": "http://page-service:3000",
     "AUTHORIZATION_API": "http://authorization-api:3000",
 
-    "WEB_API": "/api",
+    "IMAGE_API_ENDPOINT": "/images",
+    "MESSAGE_API_ENDPOINT": "/message",
+    "WEB_API_ENDPOINT": "/api",
 
     "I18N_LANGUAGES": ["no", "en"],
     "I18N_DATABASE_INDEX": "i18n",
