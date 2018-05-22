@@ -16,7 +16,7 @@ const runContainer = (context, container) => {
   const volumeParams = volumes.reduce((str, volume) => { return '-v ' + volume + ' ' + str; }, '');
 
   flags.push(`-e CRYPTEX_KEYSOURCE_PLAINTEXT_KEY=${process.env.CRYPTEX_KEYSOURCE_PLAINTEXT_KEY}`);
-  flags.push(`-e NODE_ENV=local`);
+  flags.push(`-e NODE_ENV=development`);
   const image = isExternal ? container.image : `${namespace}-${name}-local`;
 
   const cmd = `docker run -d --name ${name} ${flags.join(' ')} ${volumeParams} ${portMapping} --net ${namespace} ${image}`;

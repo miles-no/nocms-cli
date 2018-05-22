@@ -1,1 +1,1 @@
-FROM    nocms_base_dev
+FROM    miles-nocms.jfrog.io/nocms_base_dev

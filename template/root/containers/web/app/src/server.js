@@ -41,7 +41,8 @@ const areas = {
 };
 
 nocmsServer.init(initConfig)
-  .addRedirect(config.client.publisherLoginUrl, '/api/login/local')
+  .addRedirect(config.publisherLoginUrl, '/api/login/local')
+  .addRedirect(config.publisherLogoutUrl, '/api/login/logout')
   .setRobotsTxt('./src/config/robots.txt')
   .setAreas(areas)
   .setTemplates(templates)

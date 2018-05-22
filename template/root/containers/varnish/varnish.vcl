@@ -11,6 +11,11 @@ backend authentication_api {
   .port = "3000";
 }
 
+backend cloudinary {
+  .host = "cloudinary";
+  .port = "3000";
+}
+
 backend i18n {
   .host = "i18n-api";
   .port = "3000";
@@ -65,7 +70,12 @@ sub vcl_recv {
   if (req.url ~ "^/message") {
     set req.backend_hint = message_api;
 
-  }else if (req.url ~ "^/fragments/") {
+  }
+  else if (req.url ~ "^/images") {
+    set req.backend_hint = cloudinary;
+  
+  }
+  else if (req.url ~ "^/fragments/") {
     set req.backend_hint = fragments;
 
   }

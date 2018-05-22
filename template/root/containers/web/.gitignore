@@ -38,12 +38,12 @@ node_modules
 **/*.map
 
 # Generated bundles
-app/assets/javascript/nocms.js
-app/assets/javascript/scripts.js
-app/assets/javascript/*.js
-app/assets/javascript/nocms.js.gz
-app/assets/javascript/scripts.js.gz
-app/assets/javascript/*.js.gz
+app/assets/js/nocms.js
+app/assets/js/scripts.js
+app/assets/js/*.js
+app/assets/js/nocms.js.gz
+app/assets/js/scripts.js.gz
+app/assets/js/*.js.gz
 app/assets/css/admin.css
 app/assets/css/main.css
 app/bin/index.js

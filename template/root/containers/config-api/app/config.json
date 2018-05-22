@@ -23,6 +23,8 @@
         "lang": "no"
       }
     ],
+    "DEFAULT_SITE": "no",
+    "DEFAULT_LANG": "no",
 
     "PUBLISHER_LOGIN_URL":"/publishing",
     "PUBLISHER_LOGOUT_URL":"/publishing/logout",
@@ -63,7 +65,7 @@
     "SEARCH_API_DATABASE_INDEX": "search",
     "SEARCH_API_RABBIT_MQ_QUEUE": "search_api",
 
-    "I18N_LANGUAGES": ["no", "en"],
+    "I18N_LANGUAGES": [],
     "I18N_DATABASE_INDEX": "i18n",
     "I18N_API_DATABASE": "elasticsearch",
     "I18N_API_DATABASE_HOST": "http://elasticsearch:9200",
@@ -71,6 +73,7 @@
     "CLOUDINARY_CLOUD_NAME": "",
     "CLOUDINARY_API_KEY": "",
     "CLOUDINARY_API_SECRET": "",
+    "CLOUDINARY_PDF_FOLDERS": ["Pdf"],
 
     "RABBIT_MQ_LOGIN": "+bTn/wkpM5+QS4+Q9gMWxBW6LsV6rNhudCOu6+1RpRk=",
     "RABBIT_MQ_PASSWORD": "HRC93adrHCHbnDVCVa/jREaWBhUwLWgaHXxkiF4WqCg=",
