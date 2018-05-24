@@ -65,7 +65,7 @@
     "SEARCH_API_DATABASE_INDEX": "search",
     "SEARCH_API_RABBIT_MQ_QUEUE": "search_api",
 
-    "I18N_LANGUAGES": [],
+    "I18N_LANGUAGES": ["no"],
     "I18N_DATABASE_INDEX": "i18n",
     "I18N_API_DATABASE": "elasticsearch",
     "I18N_API_DATABASE_HOST": "http://elasticsearch:9200",
