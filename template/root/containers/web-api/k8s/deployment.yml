@@ -2,7 +2,6 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: web-api
-  namespace: {%= namespace %}-prod
 spec:
   replicas: 1
   strategy:

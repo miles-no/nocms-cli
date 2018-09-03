@@ -76,6 +76,7 @@ jobs:
             export DOCKER_TAG=`cat workspace/version`
             export KUBE_CERT_NAME=$DEPLOY_CERT_NAME
             export GIT_SSH_KEY_NAME=$DEPLOY_GIT_SSH_KEY
+            export KUBE_CLUSTER=$DEPLOY_KUBE_CLUSTER
             echo "Deploying version $DOCKER_TAG"
             /run.sh
 

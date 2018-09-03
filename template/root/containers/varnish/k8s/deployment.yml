@@ -2,7 +2,6 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: varnish
-  namespace: {%= namespace %}-prod
 spec:
   replicas: 1
   strategy:
