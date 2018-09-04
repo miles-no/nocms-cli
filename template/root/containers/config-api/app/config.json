@@ -44,6 +44,7 @@
     "NOCMS_USER_INFO_COOKIE_NAME": "nocms-user",
     "USER_COOKIE_NAME": "end-user-authenticated",
     "TOKEN_SECRET": "OjmXQsAYTxpkT9sKjMHkELuq9cGXZujgOV7q4GUNisTgQTfqn3PUPh8V6maEhdbJwpGhTRcj/UlOdOR6o3PcpqMvHgth+yUSBlIhJmIGkwvc32L0d4OkXn5yJKWFWL3nXz35wXnglHRoBKf1M995oA==",
+    "ADMIN_UNPUBLISH": true,
 
     "USERS": [
       { "userId": "admin@miles.no", "claims": { "publisher": true, "admin": true, "developer": true } }

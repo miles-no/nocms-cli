@@ -26,6 +26,7 @@ module.exports = function adapter(remoteConfig) {
     },
     i18nApi: remoteConfig.I18N_API,
     admin: {
+      unpublish: remoteConfig.ADMIN_UNPUBLISH,
       sites: remoteConfig.SITE_LIST,
       lang: remoteConfig.ADMIN_LANG,
     },
