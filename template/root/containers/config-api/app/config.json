@@ -47,7 +47,7 @@
     "ADMIN_UNPUBLISH": true,
 
     "USERS": [
-      { "userId": "admin@miles.no", "claims": { "publisher": true, "admin": true, "developer": true } }
+      { "userId": "webteam@miles.no", "claims": { "publisher": true, "admin": true, "developer": true } }
     ],
 
     "I18N_API": "http://i18n-api:3000",
