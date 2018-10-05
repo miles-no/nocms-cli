@@ -25,6 +25,17 @@ module.exports = function getContext() {
     }
 
     if (!contents) {
+      currentFile = `${parentFolders.join('/')}/setup/nocms.conf.js`;
+      contents = getFileContents(currentFile);
+      isJson = false;
+    }
+
+    if (!contents) {
+      currentFile = `${parentFolders.join('/')}/setup/nocms.conf.json`;
+      contents = getFileContents(currentFile);
+    }
+
+    if (!contents) {
       parentFolders.pop();
       continue;
     }
