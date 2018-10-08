@@ -1,0 +1,8 @@
+{
+  "extends": "webteam",
+  "rules": {
+    "no-continue": "off",
+    "no-console": "off",
+    "no-plusplus": "off"
+  }
+}

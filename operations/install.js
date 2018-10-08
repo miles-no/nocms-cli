@@ -12,8 +12,8 @@ module.exports = (context) => {
   console.log('');
   console.log(chalk.green('     Installing NPM packages...'));
 
-  const containersWithPackages = context.containers.filter((c) => !c.isExternal && c.name !== 'varnish');
-  containersWithPackages.forEach((c) => installNPMPackages(context, c));
+  const containersWithPackages = context.containers.filter((c) => { return !c.isExternal && c.name !== 'varnish'; });
+  containersWithPackages.forEach((c) => { return installNPMPackages(context, c); });
 
   console.log('');
 };

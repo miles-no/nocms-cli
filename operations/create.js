@@ -1,7 +1,6 @@
 const execute = require('../helpers').execute;
 const chalk = require('chalk');
-const dockerNetwork = '192.168.4.0/24';
-const dockerNetworkName = 'nocms';
+
 const prompt = require('prompt');
 const fs = require('fs');
 const build = require('./build');
@@ -15,9 +14,9 @@ const getNetwork = (portRange) => {
     return `172.16.${ipPart}.0/24`;
   }
   if (ipPart < 512) {
-    return `172.17.${ipPart-256}.0/24`;
+    return `172.17.${ipPart - 256}.0/24`;
   }
-  return `172.18.${ipPart-512}.0/24`;
+  return `172.18.${ipPart - 512}.0/24`;
 };
 
 const getPort = (range, port) => {
@@ -30,7 +29,7 @@ module.exports = (context) => {
   console.log('');
 
   if (filesInCwd.length !== 0) {
-    console.log(chalk.red(`    You need to call create from an empty folder.`));
+    console.log(chalk.red('    You need to call create from an empty folder.'));
     return;
   }
 
@@ -48,19 +47,21 @@ module.exports = (context) => {
     n: false,
   };
 
-  const boolValues = ['yes', 'y', 'no', 'n'];
+  const boolValues = [
+    'yes', 'y', 'no', 'n',
+  ];
 
   const inputSchema = {
     properties: {
       namespace: {
-        pattern: /^[a-z\-]+$/,
+        pattern: /^[a-z-]+$/,
         message: 'Namespace must only contain lowercase letters a-z and -',
-        required: true
+        required: true,
       },
       optionI18n: {
         description: 'Do you need multi language support?',
         type: 'string',
-        conform: function (value) {
+        conform(value) {
           return boolValues.indexOf(value) >= 0;
         },
         before: (value) => {
@@ -70,7 +71,7 @@ module.exports = (context) => {
       optionFragments: {
         description: 'Do you need a seperate fragment service?',
         type: 'string',
-        conform: function (value) {
+        conform(value) {
           return boolValues.indexOf(value) >= 0;
         },
         before: (value) => {
@@ -80,7 +81,7 @@ module.exports = (context) => {
       optionsCloudinary: {
         description: 'Do you want to use cloudinary photo service?',
         type: 'string',
-        conform: function (value) {
+        conform(value) {
           return boolValues.indexOf(value) >= 0;
         },
         before: (value) => {
@@ -90,7 +91,7 @@ module.exports = (context) => {
       optionsWebApi: {
         description: 'Do you want to have a generic web api container?',
         type: 'string',
-        conform: function (value) {
+        conform(value) {
           return boolValues.indexOf(value) >= 0;
         },
         before: (value) => {
@@ -100,7 +101,7 @@ module.exports = (context) => {
       optionsSearchApi: {
         description: 'Do you want a search api?',
         type: 'string',
-        conform: function (value) {
+        conform(value) {
           return boolValues.indexOf(value) >= 0;
         },
         before: (value) => {
@@ -117,12 +118,11 @@ module.exports = (context) => {
         conform: (value) => {
           return /^\d{2,3}00$/.test(value) && value > '1100';
         },
-      }
+      },
     },
   };
 
-  prompt.get(inputSchema, function (err, result) {
-
+  prompt.get(inputSchema, (err, result) => {
     const defaultContainers = [
       {
         name: 'rabbitmq',
@@ -133,7 +133,7 @@ module.exports = (context) => {
       {
         name: 'elasticsearch',
         image: 'docker.elastic.co/elasticsearch/elasticsearch-oss:6.1.0',
-        flags: ['--user=0', `-e ES_JAVA_OPTS='-Xms512m -Xmx512m'`],
+        flags: ['--user=0', '-e ES_JAVA_OPTS=\'-Xms512m -Xmx512m\''],
         ports: [`${getPort(result.portRange, 50)}:9200`, `${getPort(result.portRange, 51)}:9300`],
         isExternal: true,
         volumes: [`esdata-${result.namespace}:/usr/share/elasticsearch/data`],
@@ -170,7 +170,7 @@ module.exports = (context) => {
         name: 'authorization-api',
         image: `${result.dockerRegistry}/${result.namespace}_authorization_api`,
         ports: [`${getPort(result.portRange, 6)}:3000`],
-      }
+      },
     ];
     const optionalContainers = [];
     const lastContainers = [
@@ -223,7 +223,7 @@ module.exports = (context) => {
         image: `${result.dockerRegistry}/search_api`,
         ports: [`${getPort(result.portRange, 24)}:3000`],
         isExternal: true,
-      })
+      });
     }
 
     const conf = {
@@ -244,7 +244,7 @@ module.exports = (context) => {
     console.log(gruntInitResult.toString('utf8'));
     conf.root = process.cwd();
     conf.currentFile = `${conf.root}/nocms.conf.json`;
-    
+
     init(conf);
     build(conf);
     install(conf);

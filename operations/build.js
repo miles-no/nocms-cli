@@ -18,15 +18,14 @@ module.exports = (context, args) => {
 
   let containersToBuild;
   if (args && args[0]) {
-    containersToBuild = context.containers.filter((c) => c.name === args[0]);
+    containersToBuild = context.containers.filter((c) => { return c.name === args[0]; });
   } else {
-    containersToBuild = context.containers.filter((c) => !c.isExternal);
+    containersToBuild = context.containers.filter((c) => { return !c.isExternal; });
   }
 
-  containersToBuild.forEach((c) => buildContainer(context, c));
+  containersToBuild.forEach((c) => { return buildContainer(context, c); });
 
   console.log('');
   console.log(chalk.green('    ...done!'));
   console.log('');
-
 };

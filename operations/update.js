@@ -2,9 +2,7 @@ const execute = require('../helpers').execute;
 const chalk = require('chalk');
 const npmInstall = require('./install');
 const build = require('./build');
-
-const bitbucket = 'git@bitbucket.org:nocms'
-const github = 'git@github.com:miles-no';
+const fs = require('fs');
 
 const pullRepo = (context, container) => {
   const target = `${context.root}/containers/${container.name}`;
@@ -15,10 +13,10 @@ const pullRepo = (context, container) => {
 
 const cloneRepo = (context, container) => {
   const target = `${context.root}/containers/${container.name}`;
-  try{
+  try {
     fs.accessSync(target);
     pullRepo(context, container);
-  }catch(ex){
+  } catch (ex) {
     console.log(`       Cloning ${container.name}...`);
     execute(`git clone ${container.repo} ${target}`);
   }
@@ -26,10 +24,10 @@ const cloneRepo = (context, container) => {
 
 module.exports = (context, args) => {
   console.log('');
-  console.log(chalk.green('     Cloning or updating containers...'));  
+  console.log(chalk.green('     Cloning or updating containers...'));
 
   if (args && args[0]) {
-    const c = context.containers.find((c) => c.name === args[0]);
+    const c = context.containers.find((container) => { return container.name === args[0]; });
     if (!c) {
       console.log(chalk.red(`Could not find container ${args[0]}`));
       return;
@@ -46,18 +44,18 @@ module.exports = (context, args) => {
 
     try {
       cloneRepo(context, c);
-    } catch(ex){
+    } catch (ex) {
       console.log(ex);
     }
   }
-  context.containers.filter((c) => c.repo && !c.isExternal).forEach((c) => {
+  context.containers.filter((container) => { return container.repo && !container.isExternal; }).forEach((container) => {
     try {
-      cloneRepo(context, c);
-    } catch(ex){
+      cloneRepo(context, container);
+    } catch (ex) {
       console.log(ex);
     }
   });
 
   npmInstall(context, args);
   build(context, args);
-}
+};

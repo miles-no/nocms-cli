@@ -6,11 +6,12 @@ const getFileContents = (file) => {
   } catch (ex) {
     return false;
   }
-}
+};
 
 module.exports = function getContext() {
   const cwd = process.cwd();
   const parentFolders = cwd.split('/');
+  let config = {};
 
   while (parentFolders.length > 0) {
     let currentFile = `${parentFolders.join('/')}/nocms.conf.json`;
@@ -47,7 +48,7 @@ module.exports = function getContext() {
         throw new Error(`Could not parse ${currentFile}`);
       }
     } else {
-      config = require(currentFile);
+      config = require(currentFile); // eslint-disable-line
     }
 
     config.root = parentFolders.join('/');

@@ -8,14 +8,14 @@ const printContext = require('./operations/print_context');
 let context;
 try {
   context = getContext();
-} catch(ex) {
+} catch (ex) {
   context = false;
 }
 
 const args = helpers.getArgs();
 const operation = args.operation || 'context';
 
-if(operation !== 'create') {
+if (operation !== 'create') {
   printContext.summary(context);
 }
 
