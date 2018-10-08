@@ -14,9 +14,6 @@ jobs:
       - run:
           name: Check packages for known vulnerabilities
           command: npm run nsp
-      - run:
-          name: Test code
-          command: npm test
   release:
     docker:
       - image: circleci/node:10.3.0

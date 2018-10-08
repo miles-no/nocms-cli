@@ -6,6 +6,11 @@
   "bin": "nocms-cli.js",
   "author": "Jørgen Landsnes",
   "license": "ISC",
+  "scripts": {
+    "test": "",
+    "eslint": "eslint --ext .js, .jsx .",
+    "nsp": "nsp check"
+  },
   "dependencies": {
     "chalk": "^2.4.0",
     "grunt-init": "^0.3.2",
