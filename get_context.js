@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 const getFileContents = (file) => {
   try {
@@ -10,7 +11,7 @@ const getFileContents = (file) => {
 
 module.exports = function getContext() {
   const cwd = process.cwd();
-  const parentFolders = cwd.split('/');
+  const parentFolders = cwd.split(path.sep);
   let config = {};
 
   while (parentFolders.length > 0) {
