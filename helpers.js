@@ -3,9 +3,9 @@ const chalk = require('chalk');
 const execSync = require('child_process').execSync;
 
 const execute = (cmd) => {
-  var isWin = process.platform === "win32";
-  if (isWin){
-    cmd = cmd.replace('&&', '&');
+  const isWin = process.platform === 'win32';
+  if (isWin) {
+    cmd = cmd.replace('&&', '&'); // eslint-disable-line
   }
   try {
     return execSync(cmd);
