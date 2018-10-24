@@ -18,5 +18,6 @@ module.exports = () => {
   console.log(`TODO * update                    : ${chalk.grey('Will pull or clone repositories, install npm packages and build the containers.')}`);
   console.log(`     * start [container]         : ${chalk.grey('Starts all containers in the order specified in the project context. If container argument\n                                   is specified only the identified container is started.')}`);
   console.log(`     * stop [container]          : ${chalk.grey('Stops all containers. If container argument is specified only the identified container is stopped.')}`);
+  console.log(`     * kubectl [environment]     : ${chalk.grey('Sets the kubectl context and namespace matching the environment.')}`);
   console.log('');
 };

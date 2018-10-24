@@ -9,6 +9,7 @@ const create = require('./create');
 const update = require('./update');
 const context = require('./print_context');
 const crypto = require('./crypto');
+const kubectl = require('./kubectl')
 
 const operations = {
   help,
@@ -22,6 +23,7 @@ const operations = {
   update,
   encrypt: crypto.encrypt,
   decrypt: crypto.decrypt,
+  kubectl,
 };
 
 module.exports = operations;
