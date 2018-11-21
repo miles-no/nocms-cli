@@ -5,11 +5,17 @@ const buildContainer = (context, container) => {
   if (container.isExternal) {
     return;
   }
+
+  const buildArgs = container.buildArgs ? container.buildArgs.map((buildArg) => {
+    return `--build-arg ${buildArg.key}=${buildArg.value}`;
+  }) : [];
+
   const target = `${context.root}/containers/${container.name}`;
   console.log(`       Building ${chalk.bold.yellow(container.name)} in ${chalk.bold.yellow(target)}`);
   const imageName = `${context.namespace}-${container.name}-local`;
   const dockerfile = `${target}/${container.dockerfile || 'Dockerfile.dev'}`;
-  execute(`docker build -f ${dockerfile} -t ${imageName} ${target}`);
+
+  execute(`docker build ${buildArgs.join(' ')} -f ${dockerfile} -t ${imageName} ${target} `);
 };
 
 module.exports = (context, args) => {
