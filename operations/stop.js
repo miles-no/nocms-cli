@@ -1,5 +1,4 @@
 const execute = require('../helpers').execute;
-const getImageName = require('../helpers').getImageName;
 const chalk = require('chalk');
 
 module.exports = (context, args) => {
@@ -7,7 +6,7 @@ module.exports = (context, args) => {
   console.log(chalk.green('    Stopping containers...'));
 
   if (args && args[0]) {
-    const container = context.containers.find((c) => c.name === args[0]);
+    const container = context.containers.find((c) => { return c.name === args[0]; });
     if (container) {
       console.log(chalk.green('     Stopping single container...'));
       execute(`docker rm -f ${container.name}`);
@@ -19,10 +18,10 @@ module.exports = (context, args) => {
 
   context.containers.forEach((container) => {
     const name = container.name;
-    console.log('    Stopping ' + name);
-    
+    console.log(`    Stopping ${name}`);
+
     execute(`docker rm -f ${name}`);
-  })
+  });
 
   console.log('');
 };

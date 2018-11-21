@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 const getFileContents = (file) => {
   try {
@@ -6,11 +7,12 @@ const getFileContents = (file) => {
   } catch (ex) {
     return false;
   }
-}
+};
 
 module.exports = function getContext() {
   const cwd = process.cwd();
-  const parentFolders = cwd.split('/');
+  const parentFolders = cwd.split(path.sep);
+  let config = {};
 
   while (parentFolders.length > 0) {
     let currentFile = `${parentFolders.join('/')}/nocms.conf.json`;
@@ -25,6 +27,17 @@ module.exports = function getContext() {
     }
 
     if (!contents) {
+      currentFile = `${parentFolders.join('/')}/setup/nocms.conf.js`;
+      contents = getFileContents(currentFile);
+      isJson = false;
+    }
+
+    if (!contents) {
+      currentFile = `${parentFolders.join('/')}/setup/nocms.conf.json`;
+      contents = getFileContents(currentFile);
+    }
+
+    if (!contents) {
       parentFolders.pop();
       continue;
     }
@@ -36,7 +49,7 @@ module.exports = function getContext() {
         throw new Error(`Could not parse ${currentFile}`);
       }
     } else {
-      config = require(currentFile);
+      config = require(currentFile); // eslint-disable-line
     }
 
     config.root = parentFolders.join('/');

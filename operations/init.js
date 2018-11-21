@@ -1,8 +1,5 @@
 const execute = require('../helpers').execute;
 const chalk = require('chalk');
-const dockerNetwork = '192.168.4.0/24';
-const dockerNetworkName = 'nocms';
-
 
 const createVolumes = (context) => {
   const volumes = [];
@@ -30,7 +27,7 @@ module.exports = (context) => {
   console.log('');
   console.log(chalk.green('    Creating docker network'));
 
-  const result = execute(`docker network create --subnet="${context.network}" ${context.namespace}`);
+  const result = execute(`docker network create ${context.network ? `--subnet="${context.network}"` : ''} ${context.namespace}`);
 
   if (result) {
     console.log(`    Network for namespace ${chalk.bold.yellow(context.namespace)} (${chalk.bold.yellow(context.network)}) created`);
