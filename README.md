@@ -29,7 +29,7 @@ Run `nocms help` to get an overview of the available operations.
 A typical collection of containers for a NoCMS project would be:
 
 | Container            | Image Name             | Description           | Type | Startup order * |
-|======================|========================|=======================|======|================|
+|---|---|---|---|---|
 | Elasticsearch        | docker.elastic.co/elasticsearch/elasticsearch-oss:6.1.0 | Elasticsearch database used by page and i18n. | External | 1 |
 | Config API           | <namespace>_config_api | Central store for configuration values. Implemented using `nocms-config-api-server` package. | Project | 1 |
 | Rabbit MQ            | rabbitmq:3.6.2-management | Message queue used for write operations | External | 1 |
