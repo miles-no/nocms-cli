@@ -3,7 +3,7 @@ const execute = require('../helpers').execute;
 
 const runContainer = (context, container) => {
   const { namespace, root } = context;
-  const { isExternal, name, flags = [], ports = [], volumes = [] } = container;
+  const { isExternal, name, flags = [], ports = [], volumes = [], ip = false, timezone = false } = container;
 
   console.log(`     Starting ${isExternal ? 'external container ' : ''} ${chalk.bold(container.name)}...`);
 
@@ -17,9 +17,13 @@ const runContainer = (context, container) => {
 
   flags.push(`-e CRYPTEX_KEYSOURCE_PLAINTEXT_KEY=${process.env.CRYPTEX_KEYSOURCE_PLAINTEXT_KEY}`);
   flags.push('-e NODE_ENV=development');
+  if (timezone) {
+    flags.push(`-e TZ=${timezone}`);
+  }
   const image = isExternal ? container.image : `${namespace}-${name}-local`;
 
-  const cmd = `docker run -d --name ${name} ${flags.join(' ')} ${volumeParams} ${portMapping} --net ${namespace} ${image}`;
+  const cmd = `docker run -d --name ${name} ${flags.join(' ')} ${ip ? `--ip="${ip}"` : ''} ${volumeParams} ${portMapping} --net ${namespace} ${image}`;
+  // console.log(cmd);
   execute(cmd);
 };
 
