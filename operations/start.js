@@ -3,9 +3,14 @@ const execute = require('../helpers').execute;
 
 const runContainer = (context, container) => {
   const { namespace, root } = context;
-  const { isExternal, name, flags = [], ports = [], volumes = [], ip = false, timezone = false } = container;
+  const { isExternal, name, flags = [], ports = [], volumes = [], ip = false, timezone = false, doNotRun = false } = container;
 
-  console.log(`     Starting ${isExternal ? 'external container ' : ''} ${chalk.bold(container.name)}...`);
+  if (doNotRun) {
+    console.log(`     Skipping ${chalk.bold(container.name)}... (doNotRun flag set)`);
+    return;
+  }
+
+  console.log(`     Starting ${isExternal ? 'external container ' : ''}${chalk.bold(container.name)}...`);
 
   const portMapping = ports.reduce((str, mapping) => { return `-p ${mapping} ${str}`; }, '');
 

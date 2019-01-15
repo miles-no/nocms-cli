@@ -2,7 +2,8 @@ const execute = require('../helpers').execute;
 const chalk = require('chalk');
 
 const buildContainer = (context, container) => {
-  if (container.isExternal) {
+  if (container.isExternal || container.doNotBuild) {
+    console.log(`       Skipping ${chalk.bold(container.name)}... (doNotBuild flag set)`);
     return;
   }
 

@@ -18,7 +18,12 @@ module.exports = (context, args) => {
 
   context.containers.forEach((container) => {
     const name = container.name;
-    console.log(`    Stopping ${name}`);
+    if (container.doNotRun) {
+      console.log(`    Skipping ${chalk.bold(name)}... (doNotRun flag set)`);
+      return;
+    }
+
+    console.log(`    Stopping ${chalk.bold(name)}`);
 
     execute(`docker rm -f ${name}`);
   });
