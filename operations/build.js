@@ -16,7 +16,7 @@ const buildContainer = (context, container) => {
   const imageName = `${context.namespace}-${container.name}-local`;
   const dockerfile = `${target}/${container.dockerfile || 'Dockerfile.dev'}`;
 
-  execute(`docker build ${buildArgs.join(' ')} -f ${dockerfile} -t ${imageName} ${target} `);
+  execute(`docker build --no-cache ${buildArgs.join(' ')} -f ${dockerfile} -t ${imageName} ${target} `);
 };
 
 module.exports = (context, args) => {
@@ -25,12 +25,18 @@ module.exports = (context, args) => {
 
   let containersToBuild;
   if (args && args[0]) {
-    containersToBuild = context.containers.filter((c) => { return c.name === args[0]; });
+    containersToBuild = context.containers.filter((c) => {
+      return c.name === args[0];
+    });
   } else {
-    containersToBuild = context.containers.filter((c) => { return !c.isExternal; });
+    containersToBuild = context.containers.filter((c) => {
+      return !c.isExternal;
+    });
   }
 
-  containersToBuild.forEach((c) => { return buildContainer(context, c); });
+  containersToBuild.forEach((c) => {
+    return buildContainer(context, c);
+  });
 
   console.log('');
   console.log(chalk.green('    ...done!'));
