@@ -15,8 +15,6 @@ RabbitMQ-login
 RabbitMQ-passord
 TokenSecret
 
-
-
 Command line interface for NoCMS projects.
 
 ## Installation
