@@ -24,7 +24,9 @@ const getRuntimeEnv = () => {
       if (fs.readFileSync('/proc/version', 'utf8').includes('Microsoft')) {
         return 'wsl';
       }
-    } catch (err) {}
+    } catch (err) {
+      console.log(chalk.red(err));
+    }
 
     return 'unix';
   }
