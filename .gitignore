@@ -35,3 +35,5 @@ node_modules
 
 # Source maps
 **/*.map
+
+nocms-cli-1\.0\.0\.tgz

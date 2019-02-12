@@ -1,13 +1,5 @@
-const fs = require('fs');
 const path = require('path');
-
-const getFileContents = (file) => {
-  try {
-    return fs.readFileSync(file);
-  } catch (ex) {
-    return false;
-  }
-};
+const getFileContents = require('./helpers').getFileContents;
 
 module.exports = function getContext() {
   const cwd = process.cwd();
@@ -54,6 +46,7 @@ module.exports = function getContext() {
 
     config.root = parentFolders.join('/');
     config.contextFile = currentFile;
+
     return config;
   }
 

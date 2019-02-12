@@ -1,4 +1,6 @@
 const chalk = require('chalk');
+const fs = require('fs');
+const os = require('os');
 
 const execSync = require('child_process').execSync;
 
@@ -14,6 +16,39 @@ const execute = (cmd) => {
     console.log(ex.stdout.toString('utf8'));
     return false;
   }
+};
+
+const getRuntimeEnv = () => {
+  if (process.platform === 'linux') {
+    try {
+      if (fs.readFileSync('/proc/version', 'utf8').includes('Microsoft')) {
+        return 'wsl';
+      }
+    } catch (err) {}
+
+    return 'unix';
+  }
+
+  if (os.release().includes('Microsoft')) {
+    return 'windows';
+  }
+
+  return false;
+};
+
+const getNormalizedPath = (p) => {
+  let normalizedPath = p;
+  const runtimeEnv = getRuntimeEnv();
+
+  console.log(`Runtime Env: ${runtimeEnv}`);
+
+  if (runtimeEnv === 'wsl') {
+    normalizedPath = execute(`/bin/wslpath -m ${p}`);
+  }
+
+  console.log(`Normalized Path: ${p} => ${normalizedPath}`);
+
+  return normalizedPath.toString().trim();
 };
 
 const getArgs = () => {
@@ -50,9 +85,20 @@ const getImageName = (container, runLocal) => {
   return container.image;
 };
 
+const getFileContents = (file) => {
+  try {
+    return fs.readFileSync(file);
+  } catch (ex) {
+    return false;
+  }
+};
+
 module.exports = {
   execute,
   getArgs,
   fit,
   getImageName,
+  getNormalizedPath,
+  getRuntimeEnv,
+  getFileContents,
 };

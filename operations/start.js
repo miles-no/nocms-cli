@@ -1,9 +1,23 @@
 const chalk = require('chalk');
+const fs = require('fs');
+const getNormalizedPath = require('../helpers').getNormalizedPath;
 const execute = require('../helpers').execute;
 
 const runContainer = (context, container) => {
-  const { namespace, root } = context;
-  const { isExternal, name, flags = [], ports = [], volumes = [], ip = false, timezone = false, doNotRun = false } = container;
+  const {
+    namespace,
+    root,
+  } = context;
+  const {
+    isExternal,
+    name,
+    flags = [],
+    ports = [],
+    volumes = [],
+    ip = false,
+    timezone = false,
+    doNotRun = false,
+  } = container;
 
   if (doNotRun) {
     console.log(`     Skipping ${chalk.bold(container.name)}... (doNotRun flag set)`);
@@ -12,13 +26,26 @@ const runContainer = (context, container) => {
 
   console.log(`     Starting ${isExternal ? 'external container ' : ''}${chalk.bold(container.name)}...`);
 
-  const portMapping = ports.reduce((str, mapping) => { return `-p ${mapping} ${str}`; }, '');
+  const portMapping = ports.reduce((str, mapping) => {
+    return `-p ${mapping} ${str}`;
+  }, '');
 
   if (!isExternal) {
-    volumes.push(`${root}/containers/${name}/app:/usr/src/app`);
+    const appPath = `${root}/containers/${name}/app`;
+
+    if (fs.existsSync(appPath)) {
+      let normalizedAppPath = getNormalizedPath(appPath);
+      normalizedAppPath = normalizedAppPath.replace(/\r?\n|\r/g, ' ');
+
+      volumes.push(`"${normalizedAppPath}":/usr/src/app`);
+    } else {
+      console.log(chalk.red(`     The volume path ${appPath} does not exist`));
+    }
   }
 
-  const volumeParams = volumes.reduce((str, volume) => { return `-v ${volume} ${str}`; }, '');
+  const volumeParams = volumes.reduce((str, volume) => {
+    return `-v ${volume} ${str}`;
+  }, '');
 
   flags.push(`-e CRYPTEX_KEYSOURCE_PLAINTEXT_KEY=${process.env.CRYPTEX_KEYSOURCE_PLAINTEXT_KEY}`);
   flags.push('-e NODE_ENV=development');
@@ -37,7 +64,9 @@ module.exports = (context, args) => {
   const containersToRun = context.containers;
 
   if (args && args[0]) {
-    const container = context.containers.find((c) => { return c.name === args[0]; });
+    const container = context.containers.find((c) => {
+      return c.name === args[0];
+    });
     if (container) {
       console.log(chalk.green('     Starting single container...'));
       runContainer(context, container);
@@ -48,6 +77,8 @@ module.exports = (context, args) => {
   }
 
   console.log(chalk.green('     Starting containers...'));
-  containersToRun.forEach((c) => { return runContainer(context, c); });
+  containersToRun.forEach((c) => {
+    return runContainer(context, c);
+  });
   console.log('');
 };

@@ -16,7 +16,7 @@ const buildContainer = (context, container) => {
   const imageName = `${context.namespace}-${container.name}-local`;
   const dockerfile = `${target}/${container.dockerfile || 'Dockerfile.dev'}`;
 
-  execute(`docker build --no-cache ${buildArgs.join(' ')} -f ${dockerfile} -t ${imageName} ${target} `);
+  execute(`docker build ${buildArgs.join(' ')} -f ${dockerfile} -t ${imageName} ${target} `);
 };
 
 module.exports = (context, args) => {
