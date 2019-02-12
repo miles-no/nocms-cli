@@ -9,6 +9,7 @@ module.exports = () => {
   console.log('');
   console.log(`     ${chalk.bold.green('Available operations are:')}`);
   console.log('');
+  console.log(`     * version                   : ${chalk.grey('Prints the installed version of nocms-cli')}`);
   console.log(`     * create                    : ${chalk.grey('Will start a generator for setting up a NoCMS project from scratch. Make sure you run it from an empty directory.')}`);
   console.log(`     * init                      : ${chalk.grey('Will create the docker network for the current namespace and create volumes for containers listed in context.')}`);
   console.log(`     * encrypt <string> [secret] : ${chalk.grey('Will encrypt a value using env var CRYPTEX_KEYSOURCE_PLAINTEXT_KEY or last argument.\n                                   Use for storing secret values in config api.')}`);
